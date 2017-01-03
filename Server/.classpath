@@ -3,9 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OCSF"/>
-	<classpathentry kind="lib" path="D:/Assignment3/OCSF"/>
-	<classpathentry kind="lib" path="D:/Assignment3/Server"/>
-	<classpathentry kind="lib" path="D:/Assignment3/Client/libs/mysql-connector-java-3.1.11-bin.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/msgs"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/msgs"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Alex/git/SELab/Client/libs/mysql-connector-java-3.1.11-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

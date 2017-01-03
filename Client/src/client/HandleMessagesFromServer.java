@@ -1,12 +1,9 @@
 package client;
 
-import gui_init.Gui_init;
-import gui_init.Gui_init1;
-import gui_init.employeeLoginController;
-
 import java.util.ArrayList;
 
 import common.msgs;
+import gui_init.employeeLoginController;
 
 public class HandleMessagesFromServer {
 	  ArrayList <msgs> msgfromserver;
