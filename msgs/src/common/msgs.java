@@ -8,6 +8,7 @@ import java.util.HashMap;
 @SuppressWarnings("serial")
 public class msgs implements Serializable{
 	private int opCode;
+	private int bookid;
 	HashMap<String, String> map;
 
 	String search;
@@ -44,6 +45,19 @@ public class msgs implements Serializable{
 	
 	public void setOPCode(int opcode){
 		this.opCode=opcode;
+	}
+
+	public int getBookid() {
+		return bookid;
+	}
+
+	public void setBookid(int bookid) {
+		this.bookid = bookid;
+	}
+
+	public void setMap(HashMap<String, String> newmap) {
+		this.map=newmap;
+		
 	}
 	
 }

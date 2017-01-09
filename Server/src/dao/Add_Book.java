@@ -1,72 +1,92 @@
 package dao;
 
 import java.sql.SQLException;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.ResultSet;
+import com.mysql.jdbc.Statement;
+
 import common.msgs;
 
 public class Add_Book {
 
 	msgs thismessage;
 	Connection localdbConnection;
+	ResultSet rs;
+	Statement stmt=null;
 	
 	public void getAdd_Book(msgs loginmsgs,Connection dbConnection){
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
-		PreparedStatement ps=null;
-		
-		int i,j;
+		//PreparedStatement ps=null;
+		Statement stmt1=null;
+		int bookid=0;
+		String insertTableSQL1=null;
+		//String genreSubString=null;
+		//int i,j;
 		
 		try {			
 			
+			stmt1=(Statement) dbConnection.createStatement();
+					
 			String insertTableSQL = "INSERT INTO books"
-					+ "(bookname, category, summary) VALUES"
-					+ "(?,?,?)";
+					+ "(title, language, summary,tableofcontents,price) VALUES"
+					+ "('"+thismessage.getMapValue("title")+"','"+thismessage.getMapValue("language")
+					+ "','"+thismessage.getMapValue("summary")+"','"+thismessage.getMapValue("tableofcontents")+"','"+thismessage.getMapValue("price")+"');";
 			
-			ps = (PreparedStatement) localdbConnection.prepareStatement(insertTableSQL);
-			ps.setString(1,thismessage.getMapValue("book"));
-			ps.setString(2,thismessage.getMapValue("category"));
-			ps.setString(3,thismessage.getMapValue("summary"));
+
+			stmt1.executeUpdate(insertTableSQL);
 			
-			ps.executeUpdate();
+			insertTableSQL = "SELECT max(bookid) FROM books";
 			
-			String insertTableSQL1 = "INSERT INTO bookauthors"
-					+ "(bookname, author) VALUES"
-					+ "(?,?)";
-			ps.clearParameters();
-				
-				
-			ps = (PreparedStatement) localdbConnection.prepareStatement(insertTableSQL1);
-			
-			for (i=0;i<Integer.parseInt(thismessage.getMapValue("numberofauthors"));i++)
-			{
-				
-				j=i+1;
-				ps.setString(1,thismessage.getMapValue("book"));
-				ps.setString(2,thismessage.getMapValue("author"+j));
-				ps.executeUpdate();
-				
+			try {
+				stmt = (Statement) dbConnection.createStatement();
+				rs=(ResultSet) stmt.executeQuery(insertTableSQL);
+					while(rs.next()){
+						bookid=rs.getInt(1);
+					}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			
-			String insertTableSQL2 = "INSERT INTO bookcategory"
-					+ "(bookname, category) VALUES"
-					+ "(?,?)";
-			ps.clearParameters();
-				
-				
-			ps = (PreparedStatement) localdbConnection.prepareStatement(insertTableSQL2);
-			
-			for (i=0;i<Integer.parseInt(thismessage.getMapValue("numberofcategory"));i++)
+			for (String key : thismessage.getMap().keySet()) 	
 			{
-				
-				j=i+1;
-				ps.setString(1,thismessage.getMapValue("book"));
-				ps.setString(2,thismessage.getMapValue("category"+j));
-				ps.executeUpdate();
-				
+				if(key.contains("author"))
+				{
+					insertTableSQL1 = "INSERT INTO booksauthor"
+							+ "(bookid, author) VALUES("
+							+ bookid+",'"+thismessage.getMapValue(key)+"');";
+					System.out.println("\n"+insertTableSQL1+"\n");
+					stmt1.executeUpdate(insertTableSQL1);
+				}
 			}
 			
-			ps.close();
+			for (String key : thismessage.getMap().keySet()) 	
+			{
+				if(key.contains("genre"))
+				{
+					//genreSubString=key.substring(key.length()-1);
+					
+					insertTableSQL1 = "INSERT INTO bookgenre"
+							+ "(bookid,genre) VALUES("
+							+ bookid+",'"+thismessage.getMapValue(key)+"');";
+					stmt1.executeUpdate(insertTableSQL1);
+				}
+			}
+			
+			for (String key : thismessage.getMap().keySet()) 	
+			{
+				if(key.contains("keyword"))
+				{			
+					insertTableSQL1 = "INSERT INTO keywords"
+							+ "(bookid, keyword) VALUES("
+							+ bookid+",'"+thismessage.getMapValue(key)+"');";
+					stmt1.executeUpdate(insertTableSQL1);
+				}
+			}
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

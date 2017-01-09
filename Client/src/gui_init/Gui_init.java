@@ -23,7 +23,7 @@ public class Gui_init {
 		
 		
 		
-	//	chat.client.getgui(this);
+		/*chat.client.getgui(this);*/
 		GUI_Display();
 		
 	}

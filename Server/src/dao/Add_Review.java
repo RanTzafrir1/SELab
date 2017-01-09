@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 
 import common.msgs;
 
@@ -11,30 +12,34 @@ public class Add_Review {
 	msgs thismessage;
 	Connection localdbConnection;
 	
+	@SuppressWarnings("null")
 	public void getReview(msgs loginmsgs,Connection dbConnection){
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
-		PreparedStatement ps=null;
+		Statement stmt = null;
+		int bookid=0;
 		
 		try {			
 			
+			stmt=(Statement) dbConnection.createStatement(); 
+			
+			bookid=thismessage.getBookid();
+			
 			String insertTableSQL = "INSERT INTO reviews"
-					+ "(book, username, review) VALUES"
-					+ "(?,?,?)";
+					+ "(bookid, username, review) VALUES"
+					+ "("+bookid+",'"+thismessage.getMapValue("username")+"','"+thismessage.getMapValue("review")+"');";
 			
-			ps = (PreparedStatement) localdbConnection.prepareStatement(insertTableSQL);
 			
-			ps.setString(1,thismessage.getMapValue("book"));
-			ps.setString(2,thismessage.getMapValue("username"));
-			ps.setString(3,thismessage.getMapValue("review"));
-			ps.setString(4,"0");
+			System.out.println("\n"+insertTableSQL+"\n");
 			
-			ps.executeUpdate();
+			stmt.executeUpdate(insertTableSQL);
+
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+			
 		
 	}
 }

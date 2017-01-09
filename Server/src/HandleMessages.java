@@ -42,7 +42,9 @@ public class HandleMessages {
 	}
 	public void letsgo(){
 
-		if ((thismessage.getOPcode())==1)
+		if ((thismessage.getOPcode())==6)
+			Search();
+		if ((thismessage.getOPcode())==5)
 			Search();
 		if ((thismessage.getOPcode())==2)
 			Login();
@@ -50,16 +52,37 @@ public class HandleMessages {
 			Add_Book();
 		if ((thismessage.getOPcode())==4)
 			Add_User();
+		if ((thismessage.getOPcode())==7)
+			Add_A_Review();
+		if ((thismessage.getOPcode())==8)
+			Add_Purchase();
 		
 	}
+	
+	private void Add_Purchase() {
+		System.out.println ("\n We got to Add_Purchasse\n");
+		Add_Purchase localAdd_Purchase = new Add_Purchase();
+		Connection conn=(Connection) connect.getConnection();
+		localAdd_Purchase.getPurchase(thismessage,conn);
+				
+	}
+	
+	public Runnable Add_A_Review(){
+		Add_Review localAdd_Review = new Add_Review();
+		Connection conn=(Connection) connect.getConnection();
+		localAdd_Review.getReview(thismessage,conn);
+		
+		return null;
+	}
+	
 	public Runnable Search(){
 		localMsg=new msgs(1);
 		localMsg=this.thismessage;
-		int i;
 		Connection conn=(Connection) connect.getConnection();
 		Search localSearch = new Search();	
-		i=Search.getSearch(localMsg,conn);
-		
+		ArrayList <msgs> loginArrayMsg = new ArrayList <msgs>();
+		loginArrayMsg=Search.getOrSearch(localMsg,conn);
+		sendMessageToServer(loginArrayMsg);	
 		//loginArrayMsg=localLogin.getLogin(localMsg, conn);
 		
 		return null;

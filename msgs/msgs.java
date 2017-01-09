@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class msgs implements Serializable{
 	private int opCode;
 	HashMap<String, String> map;
+	private int bookid;
 	
 	public msgs(int op){
 		map = new HashMap<String, String>();
@@ -23,8 +24,25 @@ public class msgs implements Serializable{
 		return map.get(key);
 	}
 	
+	public void setMap(HashMap<String, String> newmap){
+		map=newmap;
+	}
+
+	
 	public int getOPcode(){
 		return this.opCode;
+	}
+	
+	public void setOPCode(code){
+		this.opCode=id;
+	}
+	
+	public int getBookID(){
+		return this.bookid;
+	}
+	
+	public void setBookID(int id){
+		this.bookid=id;
 	}
 }
 

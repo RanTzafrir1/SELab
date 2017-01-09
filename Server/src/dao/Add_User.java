@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 
 import common.msgs;
 
@@ -15,11 +16,12 @@ public class Add_User {
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
 		PreparedStatement ps=null;
+		Statement stmt=null;
 		try {			
 			
 			String insertTableSQL = "INSERT INTO users"
-					+ "(username, password, firstname, lastname,ssn,type) VALUES"
-					+ "(?,?,?,?,?,?)";
+					+ "(username, password, firstname, lastname,ssn) VALUES"
+					+ "(?,?,?,?,?)";
 			
 			ps = (PreparedStatement) localdbConnection.prepareStatement(insertTableSQL);
 			
@@ -28,10 +30,16 @@ public class Add_User {
 			ps.setString(3,thismessage.getMapValue("firstname"));
 			ps.setString(4,thismessage.getMapValue("lastname"));
 			ps.setString(5,thismessage.getMapValue("ssn"));
-			ps.setString(6,thismessage.getMapValue("type"));
 			
 			ps.executeUpdate();
 			
+			stmt=(Statement) dbConnection.createStatement();
+			
+			insertTableSQL = "INSERT INTO readers"
+					+ "(username) VALUES('"+thismessage.getMapValue("username")+"');";
+					
+			stmt.executeUpdate(insertTableSQL);
+					
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

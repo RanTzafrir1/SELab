@@ -14,7 +14,7 @@ public class mysqlConnection {
         
         try 
         {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/prototype","root","silverdragon");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/Assignment3","root","silverdragon");
             System.out.println("SQL connection succeed");
      	} catch (SQLException ex) 
      	    {/* handle any errors*/

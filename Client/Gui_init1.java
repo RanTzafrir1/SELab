@@ -18,8 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import client.ClientConsole;
 import common.msgs;
 
 
@@ -119,7 +117,7 @@ public class Gui_init1 extends JFrame{
 			
 			
 			 
-			/*try {
+			try {
 				URL url = new URL( "http://cdn.modernfarmer.com/wp-content/uploads/2014/09/cowhero2.jpg");
 				BufferedImage myPicture = ImageIO.read(url);
 				JLabel wIcon = new JLabel(new ImageIcon(myPicture.getScaledInstance(240, 200, myPicture.SCALE_SMOOTH)));
@@ -132,7 +130,7 @@ public class Gui_init1 extends JFrame{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 			
 		}
 
