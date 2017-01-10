@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import common.MainFrame;
+
 import client.ClientConsole;
 import gui_init.*;
 
@@ -17,7 +19,8 @@ public class MainClass extends JFrame{
 	
 	final public static int DEFAULT_PORT = 5552;
 
-	static Gui_init1 GUI;
+	//static Gui_init1 GUI;
+	static MainFrame frame;
 	
 	 public static void main(String[] args)
 	 {
@@ -47,8 +50,9 @@ public class MainClass extends JFrame{
 		    }
 		 	
 		    ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
-		    GUI = new Gui_init1(chat);
-		    GUI.setVisible(true);  
+		    frame = new MainFrame(chat);
+		    //GUI = new Gui_init1(chat);
+		    //GUI.setVisible(true);  
 		    //chat.display("Welcome!1");
 	 }
 }

@@ -4,6 +4,7 @@
 
 package client;
 import ocsf.client.*;
+import Controllers.Controller_Mainpage;
 import common.*;
 
 import java.io.*;
@@ -36,7 +37,7 @@ public class ChatClient extends AbstractClient implements Serializable
   //public Object msgslistfromserver;
   ArrayList <msgs> msgfromserver;
   public msgs tempmsg;
-  employeeLoginController GUI;
+  Controller_Mainpage GUI;
   HandleMessagesFromServer messagehandler;
   
   //Constructors ****************************************************
@@ -65,7 +66,13 @@ public void handleMessageFromServer(Object msg)
   {
     //this.msgslistfromserver=(ArrayList<msgs>) msg;
     //this.msgslistfromserver=msg;
+		
+		
 	  msgfromserver = (ArrayList<msgs>) msg;
+	  
+	  System.out.println("\nWe are here");
+	  System.out.println("\nThis is the opcode: "+msgfromserver.get(0).getOPcode());
+	  
 	  messagehandler.startmessagehandler(msgfromserver);
 	  //GUI.Login_Answer(msgfromserver);
 	  
@@ -79,8 +86,8 @@ public void handleMessageFromServer(Object msg)
 	  
   }
   
-  public void getgui(employeeLoginController gui_init1){
-	  this.GUI=gui_init1;
+  public void getgui(Controller_Mainpage controller_Mainpage){
+	  this.GUI=controller_Mainpage;
 	  messagehandler = new HandleMessagesFromServer(GUI);
   }
 

@@ -11,7 +11,7 @@ import common.msgs;
 
 public class employeeLoginController {
 
-	static ClientConsole thischat;
+	ClientConsole thischat;
 	msgs thisloginanswer;
 	BufferedReader fromConsole;
 	msgs forReview;
@@ -20,7 +20,7 @@ public class employeeLoginController {
 	
 
 	public employeeLoginController(ClientConsole chat){
-		employeeLoginController.thischat=chat;
+		//employeeLoginController.thischat=chat;
 		thischat.client.getgui(this);
 		fromConsole =
 	              new BufferedReader(new InputStreamReader(System.in));
@@ -43,6 +43,7 @@ public class employeeLoginController {
 		else if (userName.equals("8"))
 			Purchase_Book();
 		else{
+			
 			msgs mapmessage = new msgs(2);
 
 			mapmessage.addToMap("username", userName);
@@ -368,6 +369,15 @@ public class employeeLoginController {
 		System.out.println ("\n The username is: "+sendPurchase.getMapValue("username")+" and the bookid is: "+sendPurchase.getBookid());
 		
 		thischat.accept(sendPurchase);
+	}
+	
+	public void get_Purchases(){
+		msgs getPurchases = new msgs(9);
+		
+		getPurchases.addToMap("username", currentUser.getMapValue("username"));
+		
+		thischat.accept(getPurchases);
+		
 	}
 
 }

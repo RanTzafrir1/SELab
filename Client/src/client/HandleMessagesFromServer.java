@@ -6,15 +6,16 @@ import gui_init.employeeLoginController;
 
 import java.util.ArrayList;
 
+import Controllers.Controller_Mainpage;
 import common.msgs;
 
 public class HandleMessagesFromServer {
 	  ArrayList <msgs> msgfromserver;
 	  public msgs tempmsg;
-	  employeeLoginController GUI;
+	  Controller_Mainpage GUI;
 	  int Opcheck;
 	  
-	  HandleMessagesFromServer(employeeLoginController gUI2){
+	  HandleMessagesFromServer(Controller_Mainpage gUI2){
 		  this.GUI=gUI2;
 	  }
 
@@ -23,24 +24,33 @@ public class HandleMessagesFromServer {
 		tempmsg=msgfromserver.get(0);
 		Opcheck=tempmsg.getOPcode();
 		
+
+		
 		if (Opcheck==2)
 			Login_Handle(tempmsg);
 		
 		if (Opcheck==6)
-			Or_Search_Handle(msgfromserver);
+			Search_Handle(msgfromserver);
 		
 		if (Opcheck==5)
-			Or_Search_Handle(msgfromserver);
+			Search_Handle(msgfromserver);
+		
+		//if (Opcheck==10)
+		//	set_Categories(msgfromserver);
 
 		
 	}
 
+/*	private void set_Categories(ArrayList<msgs> categorymsg) {
+		GUI.set_category_and_genre(categorymsg);
+	}*/
+
 	private void Login_Handle(msgs loginmsg) {
-		GUI.Login_Answer(loginmsg);
+		GUI.loginmsg.Login_Answer(loginmsg);
 	}
 	
-	private void Or_Search_Handle(ArrayList<msgs> searchanswer){
-		GUI.Or_Search_Answer(searchanswer);
+	private void Search_Handle(ArrayList<msgs> searchanswer){
+		GUI.searchmsg.Search_Answer(searchanswer);
 	}
 	
 	

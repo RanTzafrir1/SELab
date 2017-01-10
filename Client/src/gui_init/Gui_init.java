@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import common.msgs;
 
 
+/**
+ * @author Ran
+ *
+ */
 public class Gui_init {
 	
 	ClientConsole thischat;
@@ -170,7 +174,7 @@ public class Gui_init {
 		
 		thischat.accept(mapmessage);
 	}
-	
+
 	public void Add_User(){
 		msgs mapmessage = new msgs(4);
 

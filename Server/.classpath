@@ -5,5 +5,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OCSF"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/msgs"/>
 	<classpathentry kind="lib" path="D:/Assignment3/Server/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Project2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

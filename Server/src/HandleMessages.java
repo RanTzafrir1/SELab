@@ -41,7 +41,8 @@ public class HandleMessages {
 		
 	}
 	public void letsgo(){
-
+		
+		
 		if ((thismessage.getOPcode())==6)
 			Search();
 		if ((thismessage.getOPcode())==5)
@@ -56,11 +57,21 @@ public class HandleMessages {
 			Add_A_Review();
 		if ((thismessage.getOPcode())==8)
 			Add_Purchase();
+		if ((thismessage.getOPcode())==9)
+			Get_Purchases();
 		
 	}
 	
+	private void Get_Purchases() {
+		localMsg=new msgs(1);
+		localMsg=this.thismessage;
+		Connection conn=(Connection) connect.getConnection();
+		ArrayList <msgs> purchasesArrayMsg = new ArrayList <msgs>();
+		purchasesArrayMsg=get_Purchases.getListOfPurchases(localMsg,conn);
+		sendMessageToServer(purchasesArrayMsg);	
+		
+	}
 	private void Add_Purchase() {
-		System.out.println ("\n We got to Add_Purchasse\n");
 		Add_Purchase localAdd_Purchase = new Add_Purchase();
 		Connection conn=(Connection) connect.getConnection();
 		localAdd_Purchase.getPurchase(thismessage,conn);
@@ -79,7 +90,6 @@ public class HandleMessages {
 		localMsg=new msgs(1);
 		localMsg=this.thismessage;
 		Connection conn=(Connection) connect.getConnection();
-		Search localSearch = new Search();	
 		ArrayList <msgs> loginArrayMsg = new ArrayList <msgs>();
 		loginArrayMsg=Search.getOrSearch(localMsg,conn);
 		sendMessageToServer(loginArrayMsg);	

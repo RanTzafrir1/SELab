@@ -15,16 +15,13 @@ import common.msgs;
 public class Search {
 	static msgs thismessage;
 	static Connection localdbConnection;
-	static ArrayList<Integer> bookidList;
+	static ArrayList<Integer> bookidList = new ArrayList<Integer>();
 	static Statement ps=null;
 	static ResultSet rs;
-	static ArrayList<msgs> msgtoserver;
+	static ArrayList<msgs> msgtoserver = new ArrayList<msgs>();
 	static int intcheck=0;
 	
-	@SuppressWarnings("static-access")
 	public Search(){
-		msgtoserver = new ArrayList<msgs>();
-		this.bookidList = new ArrayList<Integer>();
 	}
 	
 	@SuppressWarnings("unused")
@@ -32,16 +29,14 @@ public class Search {
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
 		
-		
-		
 		msgs searchLocalMessage=new msgs(6);
 		String query1=null,query2=null,query3=null,query4=null,query5=null,query6=null;
 		String tempquery=null;
 		
-
 		
 		for (String key : thismessage.getMap().keySet()) 	
 		{
+			
 			if(key.contains("title"))
 			{
 				query6=""+key+"='"+thismessage.getMapValue(key)+"'";
@@ -80,6 +75,7 @@ public class Search {
 		}
 
 		
+		
 		if(query6!=null)
 			query1=query6;
 		if(query5!=null)
@@ -90,25 +86,31 @@ public class Search {
 						query1=query6+" or "+query5;
 					else query1=query6+" and "+query5;
 		
+		
 		if (thismessage.getOPcode()==6)
 		{
-			insertBookID(query1,"books");
-			insertBookID(query2,"booksauthor");
-			insertBookID(query3,"keywords");
-			insertBookID(query4,"bookgenre");
+			if (query1!=null) insertBookID(query1,"books");
+			if (query2!=null) insertBookID(query2,"booksauthor");
+			if (query3!=null) insertBookID(query3,"keywords");
+			if (query4!=null) insertBookID(query4,"bookgenre");
 		}
+		
 		
 		else
 		{
-			insertAndBookID(query1,"books");
-			insertAndBookID(query2,"booksauthor");
-			insertAndBookID(query3,"keywords");
-			insertAndBookID(query4,"bookgenre");
+			
+			if (query1!=null) insertAndBookID(query1,"books");
+			if (query2!=null) insertAndBookID(query2,"booksauthor");
+			if (query3!=null) insertAndBookID(query3,"keywords");
+			if (query4!=null) insertAndBookID(query4,"bookgenre");
 		}
 		
-		//System.out.println("\n This is the book ID list: "+bookidList.toString());
+		
+		
 		
 		msgtoserver=buildMsgs();
+		
+		
 		
 		return msgtoserver;
 	}
@@ -128,7 +130,9 @@ public class Search {
 					while(rs.next()){
 						if (!bookidList.contains(rs.getInt(1)))
 							bookidList.add(rs.getInt(1));
+						
 					}
+					
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -148,9 +152,11 @@ public class Search {
 				ps = (Statement) localdbConnection.createStatement();
 				rs=(ResultSet) ps.executeQuery(insertTableSQL);
 					while(rs.next()){
-							bookidList1.add(rs.getInt(1));
+						bookidList1.add(rs.getInt(1));
 					}
-			System.out.println ("\nThis is the temp list: "+bookidList1.toString());
+					
+					
+			
 			
 			if (intcheck==0){
 				if (bookidList.isEmpty())
@@ -161,8 +167,7 @@ public class Search {
 					if (!bookidList1.isEmpty())
 						intcheck=1;
 			}
-			System.out.println ("\nThis is the main list: "+bookidList.toString());
-				
+			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -176,6 +181,7 @@ public class Search {
 			setMsgToServer(elem);
 
 		
+		
 		return msgtoserver;
 		
 	
@@ -184,6 +190,9 @@ public class Search {
 	public static void setMsgToServer(int elem){
 		msgs searchLocalMessage=new msgs(6);
 		String insertTableSQL=null;
+		
+		
+		
 		int counter=0;
 		
 		try {
@@ -241,8 +250,11 @@ public class Search {
 				searchLocalMessage.setOPCode(6);
 			else searchLocalMessage.setOPCode(5);
 			
+			
+			
 			msgtoserver.add(searchLocalMessage);
 			
+		
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}
