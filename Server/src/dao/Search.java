@@ -212,7 +212,7 @@ public class Search {
 			System.out.println("\n"+ insertTableSQL+"\n");
 			if(visibility == 1){//avrora
 				
-				rs.beforeFirst();
+				rs.beforeFirst();//avrora
 				while(rs.next()){
 					
 					searchLocalMessage.addToMap("bookid",rs.getString(1));
