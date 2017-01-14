@@ -10,6 +10,7 @@ import common.msgs;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class employeeLogin extends JPanel {
@@ -19,9 +20,10 @@ public class employeeLogin extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public employeeLogin() {
+	public employeeLogin(int notexists) {
 		setLayout(null);
 		msgs loginmsg = new msgs (2);
+		
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(37, 56, 84, 16);
@@ -49,8 +51,20 @@ public class employeeLogin extends JPanel {
 				MainFrame.page.call_handler(loginmsg);
 			}
 		});
-		btnSubmit.setBounds(159, 170, 97, 25);
+		btnSubmit.setBounds(157, 187, 97, 25);
 		add(btnSubmit);
+		
+		JLabel lblUserDoesNot = new JLabel("User does not exist");
+		lblUserDoesNot.setForeground(Color.RED);
+		lblUserDoesNot.setBounds(118, 155, 278, 16);
+		add(lblUserDoesNot);
+		
+		lblUserDoesNot.setVisible(false);
+		if (notexists==1)
+			lblUserDoesNot.setVisible(true);
+		
+		MainFrame.localStorage.setContentPane(this);
+		MainFrame.localStorage.setVisible(true);
 
 	}
 }

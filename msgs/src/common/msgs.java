@@ -59,6 +59,10 @@ public class msgs implements Serializable{
 		this.map=newmap;
 		
 	}
+
+	public void clearMap(){
+		this.map.clear();
+	}
 	
 }
 

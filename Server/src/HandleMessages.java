@@ -59,9 +59,27 @@ public class HandleMessages {
 			Add_Purchase();
 		if ((thismessage.getOPcode())==9)
 			Get_Purchases();
+		if ((thismessage.getOPcode())==11)
+			Get_ListOfReviews();
+		if ((thismessage.getOPcode())==13)
+			UpdateBook();
 		
 	}
 	
+	private void UpdateBook() {
+		Update_Book localUpdate_Book = new Update_Book();
+		Connection conn=(Connection) connect.getConnection();
+		localUpdate_Book.getUpdate_Book(thismessage,conn);
+	}
+	private void Get_ListOfReviews() {
+		
+		localMsg=new msgs(11);
+		localMsg=this.thismessage;
+		Connection conn=(Connection) connect.getConnection();
+		ArrayList <msgs> reviewsArrayMsg = new ArrayList <msgs>();
+		reviewsArrayMsg=get_Reviews.getListOfReviews(localMsg,conn);
+		sendMessageToServer(reviewsArrayMsg);	
+	}
 	private void Get_Purchases() {
 		localMsg=new msgs(1);
 		localMsg=this.thismessage;

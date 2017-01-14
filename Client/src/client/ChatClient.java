@@ -70,8 +70,7 @@ public void handleMessageFromServer(Object msg)
 		
 	  msgfromserver = (ArrayList<msgs>) msg;
 	  
-	  System.out.println("\nWe are here");
-	  System.out.println("\nThis is the opcode: "+msgfromserver.get(0).getOPcode());
+	
 	  
 	  messagehandler.startmessagehandler(msgfromserver);
 	  //GUI.Login_Answer(msgfromserver);

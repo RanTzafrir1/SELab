@@ -30,7 +30,6 @@ public class Add_Review {
 					+ "("+bookid+",'"+thismessage.getMapValue("username")+"','"+thismessage.getMapValue("review")+"');";
 			
 			
-			System.out.println("\n"+insertTableSQL+"\n");
 			
 			stmt.executeUpdate(insertTableSQL);
 

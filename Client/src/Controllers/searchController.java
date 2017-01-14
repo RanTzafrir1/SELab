@@ -16,19 +16,9 @@ public class searchController {
 
 public void Search_Answer(ArrayList<msgs> searchanswer) {
 	
-	/*for (msgs printmsg : searchanswer)
-	{
-		for (String key : printmsg.getMap().keySet()) 	
-		{
-			System.out.println("The "+key+" is: "+printmsg.getMapValue(key)+"\n");
-		}
-	}*/
-	
-	
-	
+
 	Controller_Mainpage.current_book=searchanswer;
-	//forReview.setBookid(searchanswer.get(0).getBookid());
-	
-	searchAnswer answer = new searchAnswer(searchanswer);
+
+	new searchAnswer(searchanswer);
 	}
 }

@@ -30,7 +30,7 @@ public class Add_Purchase {
 					+ "("+bookid+",'"+thismessage.getMapValue("username")+"','"+dateFormat.format(date)+"');";
 			
 
-			System.out.println("\n"+insertTableSQL+"\n");
+
 			
 			stmt.executeUpdate(insertTableSQL);
 

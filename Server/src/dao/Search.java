@@ -204,6 +204,7 @@ public class Search {
 		
 			while(rs.next()){
 				
+				searchLocalMessage.addToMap("bookid",rs.getString(1));
 				searchLocalMessage.addToMap("title",rs.getString(2));
 				searchLocalMessage.addToMap("language",rs.getString(3));
 				searchLocalMessage.addToMap("summary",rs.getString(4));

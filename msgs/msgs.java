@@ -44,6 +44,9 @@ public class msgs implements Serializable{
 	public void setBookID(int id){
 		this.bookid=id;
 	}
+	public void clearMap(){
+		this.map.clear();
+	}
 	
 }
 

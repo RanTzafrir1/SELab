@@ -1,5 +1,7 @@
 package Controllers;
 
+import Employee.EmployeeHomePage;
+import Employee.employeeLogin;
 import common.BookSearch;
 import common.MainFrame;
 import common.msgs;
@@ -21,14 +23,16 @@ public void Login_Answer(msgs answer){
 
 		
 		if (answer.getMapValue("username")==null)
-			System.out.printf("User does not exist");
+			new employeeLogin (1);
 		else
 		{
 			if (thisloginanswer.getMapValue("password").equals(answer.getMapValue("password")))
 				{
-					System.out.printf("You can login\n");
 					Controller_Mainpage.current_user=answer;
-					new BookSearch();
+					if (Controller_Mainpage.current_user.getMapValue("type").equals("0")) //0 is Reader, 1 is Librarian
+							new BookSearch();
+					if (Controller_Mainpage.current_user.getMapValue("type").equals("1")) //0 is Reader, 1 is Librarian
+						new EmployeeHomePage();
 				}
 			else System.out.printf("Incorrect password\n");
 		}

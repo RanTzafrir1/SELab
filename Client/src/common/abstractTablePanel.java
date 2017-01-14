@@ -15,12 +15,12 @@ import java.awt.Rectangle;
 import java.awt.Scrollbar;
 
 @SuppressWarnings("serial")
-public class abstractTablePanel extends JPanel {
+public class abstractTablePanel extends abstractPanel {
 	JButton bttn;
-	public abstractTablePanel(ArrayList<msgs> purchases[]) {
+	public abstractTablePanel(ArrayList<msgs> reviews) {
 		String str="";
 		this.setBounds(new Rectangle(700,700));
-		int row=purchases.length;
+		int row=reviews.length;
 		for(int i=0;i<row;i++)
 		{
 			str+="[20px:20px:20px]";
@@ -29,7 +29,7 @@ public class abstractTablePanel extends JPanel {
 		
 		JScrollBar scrollBar = new JScrollBar();
 		this.add(scrollBar);
-		prints(purchases);
+		prints(reviews);
 	}
 	
 		public void prints(ArrayList<msgs> items[])

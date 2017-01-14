@@ -35,11 +35,19 @@ public class HandleMessagesFromServer {
 		if (Opcheck==5)
 			Search_Handle(msgfromserver);
 		
+		if (Opcheck==9)
+			Purchases_Handle(msgfromserver);
+		
+		if (Opcheck==11)
+			Reviews_Handle(msgfromserver);
+		
 		//if (Opcheck==10)
 		//	set_Categories(msgfromserver);
 
 		
 	}
+
+
 
 /*	private void set_Categories(ArrayList<msgs> categorymsg) {
 		GUI.set_category_and_genre(categorymsg);
@@ -53,5 +61,18 @@ public class HandleMessagesFromServer {
 		GUI.searchmsg.Search_Answer(searchanswer);
 	}
 	
+	private void Reviews_Handle(ArrayList<msgs> reviewanswer) {
+		GUI.reviewmsg.openReviewList(reviewanswer);
+	}
+	
+	private void Purchases_Handle(ArrayList<msgs> purchasewanswer) {
+		for (msgs temp : purchasewanswer)
+			for (String key : temp.getMap().keySet()) 	
+			{
+				System.out.println("\nThis is the key: "+key+" and this is the value: "+temp.getMapValue(key));
+			}
+		
+		GUI.purchasemsg.openPurchaseList(purchasewanswer);
+	}
 	
 }

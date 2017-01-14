@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BookSearch extends JPanel {
+public class BookSearch extends abstractPanel {
 	private JTextField title;
 	private JTextField author;
 	private JTextField language;
@@ -20,13 +20,20 @@ public class BookSearch extends JPanel {
 	private JTextField keyword;
 	private JTextField textField;
 	int counter=0;
+	msgs searchmsg = new msgs (5);
 	
 	/**
 	 * Create the panel.
 	 */
 	public BookSearch() {
 		setLayout(null);
-		msgs searchmsg = new msgs (5);
+		
+		
+		if (MainFrame.page.current_user.getMapValue("type").equals("0"))
+			super.backbutton.setVisible(false);
+		
+		
+			
 		
 		JLabel lblTitle = new JLabel("Title");
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -113,6 +120,7 @@ public class BookSearch extends JPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				
 				if (title.getText().length()>0) 
 					searchmsg.addToMap("title", title.getText());
 				if (author.getText().length()>0) 
@@ -121,7 +129,24 @@ public class BookSearch extends JPanel {
 					searchmsg.addToMap("language", language.getText());
 				if (genre.getText().length()>0) 
 					searchmsg.addToMap("genre", language.getText());
+				
+				
+				/*msgs sendtoserver = new msgs(0);
+				
+				sendtoserver.setOPCode(searchmsg.getOPcode());
+				for (String key : searchmsg.getMap().keySet()) 	
+				{
+					sendtoserver.addToMap(key, searchmsg.getMapValue(key));
+				}
+				
+				searchmsg.clearMap();*/
 				MainFrame.page.call_handler(searchmsg);
+				
+				//searchmsg = new msgs(5);
+				//searchmsg.clearMap();
+				//searchmsg.setOPCode(5);
+				//new BookSearch();
+				
 			}
 		});
 		btnSearch.setBounds(175, 249, 97, 25);
@@ -133,6 +158,21 @@ public class BookSearch extends JPanel {
 		textField.setBounds(156, 160, 116, 22);
 		add(textField);
 		textField.setColumns(10);
+		
+		JButton btnPurchases = new JButton("Purchases");
+		btnPurchases.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				msgs purchasesmsg = new msgs (9);
+				purchasesmsg.addToMap("username", MainFrame.page.current_user.getMapValue("username"));
+				MainFrame.page.call_handler(purchasesmsg);
+			}
+		});
+		btnPurchases.setBounds(341, 83, 97, 25);
+		add(btnPurchases);
+		
+		if (MainFrame.page.current_user.getMapValue("type").equals("1"))
+			btnPurchases.setVisible(false);
+			
 		MainFrame.localStorage.setVisible(true);
 
 	}

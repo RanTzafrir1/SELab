@@ -2,6 +2,7 @@ package Employee;
 
 import javax.swing.JPanel;
 
+import common.BookSearch;
 import common.MainFrame;
 import common.abstractPanel;
 
@@ -9,13 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class EmployeeHomePage extends abstractPanel {
-	EmployeeHomePageController Controller;
 	/**
 	 * Create the panel.
 	 */
 	public EmployeeHomePage() {
 		setLayout(null);
-		Controller=new EmployeeHomePageController();
+		super.backbutton.setVisible(false);
 		
 		JButton btnAddbook = new JButton("AddBook");
 		btnAddbook.setBounds(169, 62, 97, 23);
@@ -24,8 +24,8 @@ public class EmployeeHomePage extends abstractPanel {
 		{
 			public void actionPerformed(java.awt.event.ActionEvent e) 
 			{
-				System.out.println("actionPerformed()"); 
-				Controller.OpenAddBook();
+				new AddBook();
+				
 			}
 		});
 		
@@ -36,8 +36,7 @@ public class EmployeeHomePage extends abstractPanel {
 		{
 			public void actionPerformed(java.awt.event.ActionEvent e) 
 			{
-				System.out.println("actionPerformed()"); 
-				Controller.OpenReaderCreate();
+				new CreateReader();
 			}
 		});
 		
@@ -49,8 +48,7 @@ public class EmployeeHomePage extends abstractPanel {
 		{
 			public void actionPerformed(java.awt.event.ActionEvent e) 
 			{
-				System.out.println("actionPerformed()"); 
-				Controller.OpenSearchBooks();
+				new BookSearch();
 			}
 		});
 		
@@ -66,13 +64,13 @@ public class EmployeeHomePage extends abstractPanel {
 			public void actionPerformed(java.awt.event.ActionEvent e) 
 			{
 				System.out.println("actionPerformed()"); 
-				Controller.OpenReviewsApproval();
+				//Controller.OpenReviewsApproval();
 			}
 		});
 		
 		
 		JLabel lblReviews = new JLabel("reviews?");
-		lblReviews.setBounds(312, 182, 46, 14);
+		lblReviews.setBounds(285, 182, 73, 14);
 		add(lblReviews);
 		
 		JButton btnUpdateuser = new JButton("UpdateUser");
@@ -83,11 +81,12 @@ public class EmployeeHomePage extends abstractPanel {
 			public void actionPerformed(java.awt.event.ActionEvent e) 
 			{
 				System.out.println("actionPerformed()"); 
-				Controller.OpenUpdateUsers();
+				//Controller.OpenUpdateUsers();
 			}
 		});
 		
-
+		MainFrame.localStorage.setContentPane(this);
+		MainFrame.localStorage.setVisible(true);
 	}
 
 }

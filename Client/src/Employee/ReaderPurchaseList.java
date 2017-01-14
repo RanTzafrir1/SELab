@@ -4,25 +4,25 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import common.MainFrame;
 import common.abstractPanel;
-import common.abstractTablePanel;
 import common.msgs;
 
-public class ReaderReviewList extends abstractPanel {
-
-	ArrayList<msgs> localreviews;
+public class ReaderPurchaseList extends abstractPanel{
 	
-	public ReaderReviewList(ArrayList<msgs> reviews) {
-		localreviews=reviews;
-		
+	ArrayList<msgs> localpurchases;
+	
+	public ReaderPurchaseList(ArrayList<msgs> purchases) {
+		localpurchases=purchases;
+		 
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		int counterX=0;
 		int counterY=0;
@@ -36,32 +36,41 @@ public class ReaderReviewList extends abstractPanel {
 		
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		
-		for (msgs tempmsg : reviews){
+		for (msgs tempmsg : localpurchases){
 			
-					JLabel lblUsername = new JLabel(tempmsg.getMapValue("username"));
+					JLabel lblUsername = new JLabel(tempmsg.getMapValue("title"));
 					
 					gbc_lblUsername.gridx = counterX;
 					gbc_lblUsername.gridy = counterY;
 					this.add(lblUsername, gbc_lblUsername);
 
-					JLabel lblReview = new JLabel(tempmsg.getMapValue("review"));
+					JLabel lblReview = new JLabel(tempmsg.getMapValue("date"));
 					
 					gbc_lblUsername.gridx = counterX+1;
 					gbc_lblUsername.gridy = counterY;
 					this.add(lblReview, gbc_lblUsername);
 					
+					JButton button = new JButton("addreview");
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							msgs sendtoHandler = tempmsg;
+							sendtoHandler.setOPCode(7);
+							new WriteReview(sendtoHandler);
+						}
+					});
+					gbc_lblUsername.gridx = counterX+1;
+					gbc_lblUsername.gridy = counterY;
+					this.add(button, gbc_lblUsername);					
 
 					counterY+=1;
 		}
 		
 	
+
 		
 		MainFrame.localStorage.setContentPane(this);
 		MainFrame.localStorage.setVisible(true);
 
 
 	}
-	
-	
-	
 }

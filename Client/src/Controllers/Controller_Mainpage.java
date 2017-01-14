@@ -3,16 +3,20 @@ package Controllers;
 import java.util.ArrayList;
 
 import client.ClientConsole;
+import common.MainFrame;
 import common.msgs;
 
 public class Controller_Mainpage {
-	static msgs current_user;
+	public static msgs current_user;
 	static ArrayList<msgs> current_book;
+	static ArrayList<msgs> current_reviews;
 	msgs category_and_genre_list;
 	public ClientConsole console;
 	msgs thismessage;
 	public employeLoginController loginmsg;
 	public searchController searchmsg;
+	public ListOfReviewsController reviewmsg = new ListOfReviewsController();
+	public ListOfPurchasesController purchasemsg = new ListOfPurchasesController();
 	
 	public Controller_Mainpage(ClientConsole chat)
 	{
@@ -24,6 +28,8 @@ public class Controller_Mainpage {
 		console.client.getgui(this);
 	}
 	
+	
+	
 	public void call_handler(msgs message){
 		this.thismessage=message;
 		if (thismessage.getOPcode()==2)
@@ -33,6 +39,48 @@ public class Controller_Mainpage {
 			searchmsg.search(thismessage);
 		if (thismessage.getOPcode()==6)
 			searchmsg.search(thismessage);
+		
+		if (thismessage.getOPcode()==15)
+		{	
+			MainFrame.bookP.openBookPage(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==9)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==11)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==7)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==8)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==3)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==4)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		if (thismessage.getOPcode()==13)
+		{	
+			reviewmsg.sendReviewToServer(thismessage);
+		}
+		
+		
 		
 	}	
 

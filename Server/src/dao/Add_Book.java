@@ -57,7 +57,6 @@ public class Add_Book {
 					insertTableSQL1 = "INSERT INTO booksauthor"
 							+ "(bookid, author) VALUES("
 							+ bookid+",'"+thismessage.getMapValue(key)+"');";
-					System.out.println("\n"+insertTableSQL1+"\n");
 					stmt1.executeUpdate(insertTableSQL1);
 				}
 			}
