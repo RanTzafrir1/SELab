@@ -3,6 +3,7 @@ package Employee;
 
 	import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Rectangle;
 
 	import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +29,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.DropMode;
 import javax.swing.SwingConstants;
@@ -46,13 +48,17 @@ import javax.swing.SwingConstants;
 		private JTextField textField_5;
 		private JTextField textField_6;
 		int authorcounter=0;
+		int counter=0;
+		String getCategory=null;
 		msgs addbook = new msgs(3);
+		ArrayList<msgs> genrelist = new ArrayList<msgs>();
 		
 		public AddBook() {
 			
 			
 			setLayout(null);
 			
+			genrelist=MainFrame.genreslist;
 			
 			JLabel lblTitle = new JLabel("title");
 			lblTitle.setBounds(45, 28, 56, 16);
@@ -123,10 +129,54 @@ import javax.swing.SwingConstants;
 			lblNewLabel_2.setBounds(45, 265, 56, 16);
 			add(lblNewLabel_2);
 			
-			textField_6 = new JTextField();
+			/*textField_6 = new JTextField();
 			textField_6.setBounds(159, 262, 116, 22);
 			add(textField_6);
-			textField_6.setColumns(10);
+			textField_6.setColumns(10);*/
+			
+			//JComboBox<String> categories1 = new JComboBox<String>();
+			//categories1.setBounds(new Rectangle(280, 262, 116, 22));
+			
+			JComboBox<String> genres = new JComboBox<String>();
+			for (msgs temp : genrelist)
+				genres.addItem(temp.getMapValue("category"));
+			add(genres);
+			genres.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					getCategory=(String) genres.getSelectedItem();
+					
+						//remove(categories1);
+						JComboBox<String> categories = new JComboBox<String>();
+						categories.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								counter++;
+								addbook.addToMap("genre"+counter, (String) genres.getSelectedItem());
+								remove(categories);
+							
+							}
+						});
+						categories.setBounds(new Rectangle(280, 262, 116, 22));
+					
+						for (msgs temp : genrelist)
+						{
+							if (temp.getMapValue("category").equals(getCategory))
+							{	for (String key : temp.getMap().keySet()) 	
+								{
+									if (key.contains("genre"))
+										categories.addItem(temp.getMapValue(key));
+								}
+							}
+						}
+					
+						add(categories);
+					
+				}
+			
+			});
+			
+			genres.setBounds(new Rectangle(159, 262, 116, 22));
+			
+
 			
 			JButton btnSubmit = new JButton("submit");
 			btnSubmit.addActionListener(new ActionListener() {

@@ -92,7 +92,7 @@ public class EmployeeHomePage extends abstractPanel {
 		JButton btnUpdatePaymentMethod = new JButton("Update Payment Method");
 		btnUpdatePaymentMethod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				new UpdatePaymentMethod();
 			}
 		});
 		btnUpdatePaymentMethod.setBounds(296, 130, 151, 23);

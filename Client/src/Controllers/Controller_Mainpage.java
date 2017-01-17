@@ -18,6 +18,7 @@ public class Controller_Mainpage {
 	public ListOfReviewsController reviewmsg = new ListOfReviewsController();
 	public ListOfPurchasesController purchasemsg = new ListOfPurchasesController();
 	public Error_Handle_Controller errormsg = new Error_Handle_Controller();
+	public genresController genresmsg = new genresController();
 	public Controller_Mainpage(ClientConsole chat)
 	{
 		this.console=chat;
@@ -86,7 +87,7 @@ public class Controller_Mainpage {
 		if (thismessage.getOPcode()==21)
 			reviewmsg.sendReviewToServer(thismessage);
 		
-		if(thismessage.getOPcode()==21)
+		if(thismessage.getOPcode()==23)
 			reviewmsg.sendReviewToServer(thismessage);
 		
 		

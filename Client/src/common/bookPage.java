@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import Controllers.Controller_Mainpage;
 import Employee.UpdateBook;
 
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -21,7 +22,7 @@ public class bookPage extends abstractPanel {
 	JButton btnPurchase = new JButton("Purchase");
 	JButton btnReviews = new JButton("Reviews");
 	JButton btnUpdateBook = new JButton("UpdateBook");
-
+	msgs pagemsg;
 	
 	public bookPage() {
 		setLayout(null);
@@ -41,6 +42,8 @@ public class bookPage extends abstractPanel {
 	}
 	
 	public void openBookPage(msgs bookMessage){
+		pagemsg = new msgs(10);
+		pagemsg=bookMessage;
 		lblNewLabel.setText(bookMessage.getMapValue("title"));
 		String authors="";
 		for (String key : bookMessage.getMap().keySet()) 	
@@ -57,7 +60,7 @@ public class bookPage extends abstractPanel {
 		
 		btnPurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				msgs sendtoHandler = bookMessage;
+				msgs sendtoHandler = pagemsg;
 				sendtoHandler.setOPCode(8);
 				sendtoHandler.addToMap("username", MainFrame.page.current_user.getMapValue("username"));
 				MainFrame.page.call_handler(sendtoHandler);	
@@ -80,8 +83,6 @@ public class bookPage extends abstractPanel {
 		btnReviews.setBounds(179, 235, 97, 25);
 		add(btnReviews);
 		
-		
-		
 		btnUpdateBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bookMessage.setOPCode(13);
@@ -92,7 +93,8 @@ public class bookPage extends abstractPanel {
 		btnUpdateBook.setBounds(60, 235, 97, 25);
 		add(btnUpdateBook);
 		
-
+		if (MainFrame.page.current_user.getMapValue("type").equals("0"))
+			btnUpdateBook.setVisible(false);
 		
 		
 		

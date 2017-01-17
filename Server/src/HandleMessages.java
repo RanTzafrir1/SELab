@@ -68,9 +68,26 @@ public class HandleMessages {
 			getLanguage();
 		if ((thismessage.getOPcode())==21)
 			getGenres();
+		if ((thismessage.getOPcode())==23)
+			updatePayment();
 		
 	}
 	
+	private void updatePayment() {
+		localMsg=new msgs(23);
+		localMsg=this.thismessage;
+		Connection conn=(Connection) connect.getConnection();
+		ArrayList <msgs> paymentArrayMsg = new ArrayList <msgs>();
+		paymentArrayMsg=update_Payment.update_pay(localMsg,conn);
+		msgs errormsg = new msgs(0);
+		if (paymentArrayMsg.size()==0)
+		{
+			errormsg.addToMap("error","No reviews found");
+			paymentArrayMsg.add(errormsg);
+		}
+		sendMessageToServer(paymentArrayMsg);	
+		
+	}
 	private void getGenres() {
 		localMsg=new msgs(21);
 		localMsg=this.thismessage;
@@ -103,6 +120,12 @@ public class HandleMessages {
 		Connection conn=(Connection) connect.getConnection();
 		ArrayList <msgs> reviewsArrayMsg = new ArrayList <msgs>();
 		reviewsArrayMsg=get_Reviews.getListOfReviews(localMsg,conn);
+		msgs errormsg = new msgs(0);
+		if (reviewsArrayMsg.size()==0)
+		{
+			errormsg.addToMap("error","No reviews found");
+			reviewsArrayMsg.add(errormsg);
+		}
 		sendMessageToServer(reviewsArrayMsg);	
 	}
 	private void Get_Purchases() {
@@ -111,6 +134,13 @@ public class HandleMessages {
 		Connection conn=(Connection) connect.getConnection();
 		ArrayList <msgs> purchasesArrayMsg = new ArrayList <msgs>();
 		purchasesArrayMsg=get_Purchases.getListOfPurchases(localMsg,conn);
+		msgs errormsg = new msgs(0);
+		if (purchasesArrayMsg.size()==0)
+		{
+			errormsg.addToMap("error","No purchases found");
+			purchasesArrayMsg.add(errormsg);
+		}
+		
 		sendMessageToServer(purchasesArrayMsg);	
 		
 	}
@@ -119,6 +149,7 @@ public class HandleMessages {
 		Connection conn=(Connection) connect.getConnection();
 		ArrayList <msgs> purchasesArrayMsg = new ArrayList <msgs>();
 		purchasesArrayMsg=localAdd_Purchase.getPurchase(thismessage,conn);
+
 		sendMessageToServer(purchasesArrayMsg);	
 				
 	}
@@ -136,14 +167,14 @@ public class HandleMessages {
 	public Runnable Search(){
 		localMsg=new msgs(1);
 		localMsg=this.thismessage;
-		msgs errormsg = new msgs(0);
+		
 		
 		Connection conn=(Connection) connect.getConnection();
 		ArrayList <msgs> loginArrayMsg = new ArrayList <msgs>();
 		loginArrayMsg.clear();
 	
 		loginArrayMsg=Search.getOrSearch(localMsg,conn);
-		
+		msgs errormsg = new msgs(0);
 		if (loginArrayMsg.size()==0)
 		{
 			errormsg.addToMap("error","No book was found");

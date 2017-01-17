@@ -25,6 +25,7 @@ public class get_Reviews {
 		
 		String insertTableSQL = "SELECT * FROM reviews WHERE '"+(thismessage.getMapValue("bookid"))+"'=bookid;";
 		
+		System.out.println("\n"+insertTableSQL+"\n");
 		
 		try {
 			ps = (Statement) localdbConnection.createStatement();

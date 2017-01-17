@@ -44,6 +44,9 @@ public class HandleMessagesFromServer {
 		if (Opcheck==11)
 			Reviews_Handle(msgfromserver);
 		
+		if (Opcheck==21)
+			Genres_Handle(msgfromserver);
+		
 		//if (Opcheck==10)
 		//	set_Categories(msgfromserver);
 
@@ -52,9 +55,10 @@ public class HandleMessagesFromServer {
 
 
 
-/*	private void set_Categories(ArrayList<msgs> categorymsg) {
-		GUI.set_category_and_genre(categorymsg);
-	}*/
+	private void Genres_Handle(ArrayList<msgs> genresmsg) {
+		
+		GUI.genresmsg.openGenresList(genresmsg);
+	}
 
 	private void Error_Handle(msgs errormsg) {
 		GUI.errormsg.Error_Handle(errormsg);

@@ -75,7 +75,6 @@ public class Search {
 			
 		}
 		
-		System.out.println("\n"+query3+"\n");
 		
 		if (query3!=null)
 		{
@@ -83,7 +82,6 @@ public class Search {
 			else query3=query3.substring(0, query3.length()-5);
 		}
 
-		System.out.println("\n"+query3+"\n");
 
 		
 		if(query6!=null)

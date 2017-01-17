@@ -71,6 +71,7 @@ public class searchAnswer extends abstractPanel {
 					msgs sendtoHandler = tempmsg;
 					sendtoHandler.setOPCode(15);
 					MainFrame.page.call_handler(sendtoHandler);	
+					//sendtoHandler.clearMap();
 				}	
 			});
 			
