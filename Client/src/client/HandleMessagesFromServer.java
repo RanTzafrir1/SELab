@@ -73,12 +73,6 @@ public class HandleMessagesFromServer {
 	}
 	
 	private void Purchases_Handle(ArrayList<msgs> purchasewanswer) {
-		for (msgs temp : purchasewanswer)
-			for (String key : temp.getMap().keySet()) 	
-			{
-				System.out.println("\nThis is the key: "+key+" and this is the value: "+temp.getMapValue(key));
-			}
-		
 		GUI.purchasemsg.openPurchaseList(purchasewanswer);
 	}
 	

@@ -42,6 +42,8 @@ public class Search {
 		for (String key : thismessage.getMap().keySet()) 	
 		{
 			
+			System.out.println("\n This is the key: "+key+" and this is the value: "+thismessage.getMapValue(key));
+			
 			if(key.contains("title"))
 			{
 				query6=""+key+"='"+thismessage.getMapValue(key)+"'";
@@ -73,13 +75,16 @@ public class Search {
 			
 		}
 		
+		System.out.println("\n"+query3+"\n");
+		
 		if (query3!=null)
 		{
 			if (thismessage.getOPcode()==6) query3=query3.substring(0, query3.length()-4);
 			else query3=query3.substring(0, query3.length()-5);
 		}
 
-		
+		System.out.println("\n"+query3+"\n");
+
 		
 		if(query6!=null)
 			query1=query6;
@@ -213,7 +218,7 @@ public class Search {
 			while(rs.next())//avrora
 				visibility = rs.getInt(7);//avrora
 			
-			System.out.println("\n"+ insertTableSQL+"\n");
+			//System.out.println("\n"+ insertTableSQL+"\n");
 			if(visibility == 1){//avrora
 				
 				rs.beforeFirst();//avrora
@@ -248,6 +253,7 @@ public class Search {
 					
 					counter++;
 					searchLocalMessage.addToMap("genre"+counter,rs.getString(2));
+	
 					
 				}
 				
@@ -261,7 +267,9 @@ public class Search {
 					counter++;
 					searchLocalMessage.addToMap("keyword"+counter,rs.getString(2));
 					
+					
 				}
+				
 				if (thismessage.getOPcode()==6)
 					searchLocalMessage.setOPCode(6);
 				else searchLocalMessage.setOPCode(5);
@@ -271,6 +279,7 @@ public class Search {
 				msgtoserver.add(searchLocalMessage);
 				
 			}//if
+			
 			} catch (SQLException e) {
 			e.printStackTrace();
 			}

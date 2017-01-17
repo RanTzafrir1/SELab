@@ -62,7 +62,7 @@ public class Get_User {
 				try {
 					
 					ps = (Statement) dbConnection.createStatement();
-					ps.executeUpdate(insertTableSQL2);
+					//ps.executeUpdate(insertTableSQL2);
 					
 				} catch (SQLException e) {
 					e.printStackTrace();

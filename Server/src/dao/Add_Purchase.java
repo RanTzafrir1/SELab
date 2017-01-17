@@ -3,26 +3,31 @@ package dao;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
+
 import common.msgs;
 
 public class Add_Purchase {
 	msgs thismessage;
 	Connection localdbConnection;
+	ArrayList<msgs> returnerror = new ArrayList<msgs>();
 
 	
-	public void getPurchase(msgs loginmsgs,Connection dbConnection){
+	public ArrayList<msgs> getPurchase(msgs loginmsgs,Connection dbConnection){
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
 		ResultSet rs;//
 		Statement stmt = null;
 		int bookid = 0;
 		String username = null;
-		
 		/*AVRORA CHANGES*/
 		int isfrozen = 0;
+		int count=0;
+		
 		try {
 			
 			username = thismessage.getMapValue("username");
@@ -35,9 +40,32 @@ public class Add_Purchase {
 			while(rs.next())
 				isfrozen = rs.getInt(1);
 			
-			if (isfrozen == 1){
+			if (isfrozen == 0){
+				msgs returnerror1 = new msgs (0);
+				returnerror1.addToMap("error","User is frozen");
+				returnerror.add(returnerror1);
+				return returnerror;
 				
-				rs.beforeFirst();
+			}
+			
+			insertTableSQL1 = "SELECT count(*) FROM purchases"
+					+" WHERE username = '"+username+"' AND bookid="+thismessage.getBookid()+";";
+					
+			stmt = (Statement) localdbConnection.createStatement();
+			rs=(ResultSet) stmt.executeQuery(insertTableSQL1);	
+					
+			while(rs.next()){
+				count=rs.getInt(1);
+			}
+
+			if (count==1)
+			{
+				msgs returnerror1 = new msgs (0);
+				returnerror1.addToMap("error","Book already purchased");
+				returnerror.add(returnerror1);
+				return returnerror;
+			}
+
 				try {				
 						stmt=(Statement) dbConnection.createStatement(); 
 						
@@ -56,11 +84,14 @@ public class Add_Purchase {
 						e.printStackTrace();
 					
 						}
-			}
-			else System.out.println("\nTASHLUM LO TAKIN\n");
+				
+			
+			
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}	
+			}
+
+		return null;
 					
 	}			
 			

@@ -44,7 +44,9 @@ public class get_Purchases {
 		}	
 			
 		for (msgs temp : msgtoserver){
-			insertTableSQL = "SELECT title FROM books WHERE bookid='"+Integer.toString(temp.getBookid())+"';";
+			insertTableSQL = "SELECT title FROM books WHERE bookid="+Integer.toString(temp.getBookid())+";";
+
+
 		
 			try {
 				ps = (Statement) localdbConnection.createStatement();
@@ -62,7 +64,7 @@ public class get_Purchases {
 			
 			
 			
-			
+			counter++;
 		}
 		return msgtoserver;
 	}

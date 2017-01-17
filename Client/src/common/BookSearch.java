@@ -89,24 +89,24 @@ public class BookSearch extends abstractPanel {
 		add(language);
 		language.setColumns(10);
 		
-		keyword = new JTextField();
-		keyword.setBounds(156, 160, 116, 22);
-		keyword.setText(null);
-		add(keyword);
-		keyword.setColumns(10);
-		
 		genre = new JTextField();
-		genre.setBounds(156, 198, 116, 22);
+		genre.setBounds(156, 160, 116, 22);
 		genre.setText(null);
 		add(genre);
 		genre.setColumns(10);
+		
+		keyword = new JTextField();
+		keyword.setBounds(156, 198, 116, 22);
+		keyword.setText(null);
+		add(keyword);
+		keyword.setColumns(10);
 		
 		JButton button = new JButton("+");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				counter++;
+				searchmsg.addToMap("keyword"+counter, keyword.getText());	
 				keyword.setText(null);
-				searchmsg.addToMap("keyword"+counter, title.getText());	
 			}
 		});
 		button.setBounds(284, 197, 41, 25);
@@ -120,7 +120,7 @@ public class BookSearch extends abstractPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				counter++;
 				if (title.getText().length()>0) 
 					searchmsg.addToMap("title", title.getText());
 				if (author.getText().length()>0) 
@@ -128,7 +128,9 @@ public class BookSearch extends abstractPanel {
 				if (language.getText().length()>0) 
 					searchmsg.addToMap("language", language.getText());
 				if (genre.getText().length()>0) 
-					searchmsg.addToMap("genre", language.getText());
+					searchmsg.addToMap("genre", genre.getText());
+				if (keyword.getText().length()>0) 
+					searchmsg.addToMap("keyword"+counter, keyword.getText());
 				
 				
 				/*msgs sendtoserver = new msgs(0);

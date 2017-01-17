@@ -16,7 +16,6 @@ public class employeLoginController {
 		
 		thisloginanswer=mapmessage;
 
-		System.out.println("\nWe are here\n");
 		MainFrame.localStorage.client.accept(mapmessage);
 		
 	}

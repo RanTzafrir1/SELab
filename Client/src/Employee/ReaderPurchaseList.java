@@ -58,7 +58,7 @@ public class ReaderPurchaseList extends abstractPanel{
 							new WriteReview(sendtoHandler);
 						}
 					});
-					gbc_lblUsername.gridx = counterX+1;
+					gbc_lblUsername.gridx = counterX+2;
 					gbc_lblUsername.gridy = counterY;
 					this.add(button, gbc_lblUsername);					
 

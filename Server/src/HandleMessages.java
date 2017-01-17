@@ -117,14 +117,18 @@ public class HandleMessages {
 	private void Add_Purchase() {
 		Add_Purchase localAdd_Purchase = new Add_Purchase();
 		Connection conn=(Connection) connect.getConnection();
-		localAdd_Purchase.getPurchase(thismessage,conn);
+		ArrayList <msgs> purchasesArrayMsg = new ArrayList <msgs>();
+		purchasesArrayMsg=localAdd_Purchase.getPurchase(thismessage,conn);
+		sendMessageToServer(purchasesArrayMsg);	
 				
 	}
 	
 	public Runnable Add_A_Review(){
 		Add_Review localAdd_Review = new Add_Review();
 		Connection conn=(Connection) connect.getConnection();
-		localAdd_Review.getReview(thismessage,conn);
+		ArrayList <msgs> purchasesArrayMsg = new ArrayList <msgs>();
+		purchasesArrayMsg=localAdd_Review.getReview(thismessage,conn);
+		sendMessageToServer(purchasesArrayMsg);	
 		
 		return null;
 	}
@@ -174,11 +178,13 @@ public class HandleMessages {
 		return null;
 	}
 	
-		public Runnable Add_User(){
+		public void Add_User(){
 			Connection conn=(Connection) connect.getConnection();
 			Add_User localAdd_User = new Add_User();	
-			localAdd_User.getAdd_User(thismessage,conn);
-			return null;
+			ArrayList <msgs> userArrayMsg = new ArrayList <msgs>();
+			userArrayMsg=localAdd_User.getAdd_User(thismessage,conn);
+			sendMessageToServer(userArrayMsg);
+			
 	}
 		
 	private void sendMessageToServer(ArrayList <msgs> msgtoserver){	
