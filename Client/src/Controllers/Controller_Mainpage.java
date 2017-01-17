@@ -86,6 +86,9 @@ public class Controller_Mainpage {
 		if (thismessage.getOPcode()==21)
 			reviewmsg.sendReviewToServer(thismessage);
 		
+		if(thismessage.getOPcode()==21)
+			reviewmsg.sendReviewToServer(thismessage);
+		
 		
 		
 	}	

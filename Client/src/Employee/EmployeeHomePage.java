@@ -8,6 +8,8 @@ import common.abstractPanel;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EmployeeHomePage extends abstractPanel {
 	/**
@@ -30,7 +32,7 @@ public class EmployeeHomePage extends abstractPanel {
 		});
 		
 		JButton btnCreatereader = new JButton("CreateReader");
-		btnCreatereader.setBounds(306, 62, 106, 23);
+		btnCreatereader.setBounds(296, 62, 151, 23);
 		add(btnCreatereader);
 		btnCreatereader.addActionListener(new java.awt.event.ActionListener()
 		{
@@ -74,7 +76,7 @@ public class EmployeeHomePage extends abstractPanel {
 		add(lblReviews);
 		
 		JButton btnUpdateuser = new JButton("UpdateUser");
-		btnUpdateuser.setBounds(306, 96, 106, 23);
+		btnUpdateuser.setBounds(296, 96, 151, 23);
 		add(btnUpdateuser);
 		btnUpdateuser.addActionListener(new java.awt.event.ActionListener()
 		{
@@ -86,7 +88,15 @@ public class EmployeeHomePage extends abstractPanel {
 		});
 		
 		MainFrame.localStorage.setContentPane(this);
+		
+		JButton btnUpdatePaymentMethod = new JButton("Update Payment Method");
+		btnUpdatePaymentMethod.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnUpdatePaymentMethod.setBounds(296, 130, 151, 23);
+		add(btnUpdatePaymentMethod);
 		MainFrame.localStorage.setVisible(true);
 	}
-
 }
