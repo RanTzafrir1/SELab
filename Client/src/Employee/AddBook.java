@@ -129,14 +129,6 @@ import javax.swing.SwingConstants;
 			lblNewLabel_2.setBounds(45, 265, 56, 16);
 			add(lblNewLabel_2);
 			
-			/*textField_6 = new JTextField();
-			textField_6.setBounds(159, 262, 116, 22);
-			add(textField_6);
-			textField_6.setColumns(10);*/
-			
-			//JComboBox<String> categories1 = new JComboBox<String>();
-			//categories1.setBounds(new Rectangle(280, 262, 116, 22));
-			
 			JComboBox<String> genres = new JComboBox<String>();
 			for (msgs temp : genrelist)
 				genres.addItem(temp.getMapValue("category"));
@@ -144,8 +136,6 @@ import javax.swing.SwingConstants;
 			genres.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					getCategory=(String) genres.getSelectedItem();
-					
-						//remove(categories1);
 						JComboBox<String> categories = new JComboBox<String>();
 						categories.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {

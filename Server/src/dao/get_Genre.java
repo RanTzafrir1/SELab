@@ -68,6 +68,7 @@ public class get_Genre {
 			tempmsg.addToMap("category",category);
 			msgtoserver.add(tempmsg);
 			
+
 				
 		} catch (SQLException e) {
 			e.printStackTrace();
