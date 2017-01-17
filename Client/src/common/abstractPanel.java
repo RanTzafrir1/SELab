@@ -11,21 +11,23 @@ public class abstractPanel extends JPanel {
 	protected JButton backbutton;
 	JButton Logoutbutton;
 	JButton Homepagebutton;
-	
+	private int pressedBack=0;
 	public abstractPanel(){
 		super();
 		MainFrame.localStorage.panelPassedList.add(this);
 		setLayout(null);
 
-		backbutton = new JButton("Back");
-		if(Logoutbutton==null)
+		backbutton = new JButton("Back");	
+		backbutton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) 
 		{
-			backbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			if(pressedBack==0)
+			{
 				backFunc();
+				pressedBack=1;
 			}
-		});
 		}
+		});
 		this.add(backbutton);
 		backbutton.setBounds(350, 350, 97, 25);
 		
