@@ -187,82 +187,93 @@ public class Search {
 
 
 		return msgtoserver;
-		
 	
-		}
+	}
+	
+	
 	
 	public static void setMsgToServer(int elem){
+		
+		
 		msgs searchLocalMessage=new msgs(6);
 		String insertTableSQL=null;
-		
-		
+				
+		int visibility=0;//avrora
 		
 		int counter=0;
 		
+	
 		try {
 			searchLocalMessage.setBookid(elem);
 			insertTableSQL = "SELECT * FROM books WHERE bookid='"+Integer.toString(elem)+"';";
 			
 			ps = (Statement) localdbConnection.createStatement();
 			rs=(ResultSet) ps.executeQuery(insertTableSQL);
-		
-			while(rs.next()){
+			
+			while(rs.next())//avrora
+				visibility = rs.getInt(7);//avrora
+			
+			System.out.println("\n"+ insertTableSQL+"\n");
+			if(visibility == 1){//avrora
 				
-				searchLocalMessage.addToMap("bookid",rs.getString(1));
-				searchLocalMessage.addToMap("title",rs.getString(2));
-				searchLocalMessage.addToMap("language",rs.getString(3));
-				searchLocalMessage.addToMap("summary",rs.getString(4));
-				searchLocalMessage.addToMap("tableofcontents",rs.getString(5));
-				searchLocalMessage.addToMap("price",rs.getString(6));
-				searchLocalMessage.addToMap("visibility",rs.getString(7));
-			}
-			
-			insertTableSQL = "SELECT * FROM booksauthor WHERE bookid='"+Integer.toString(elem)+"';";	
-			ps = (Statement) localdbConnection.createStatement();
-			rs=(ResultSet) ps.executeQuery(insertTableSQL);
-			
+				rs.beforeFirst();//avrora
 				while(rs.next()){
-				
-					counter++;
-					searchLocalMessage.addToMap("author"+counter,rs.getString(2));
-				
+					
+					searchLocalMessage.addToMap("bookid",rs.getString(1));
+					searchLocalMessage.addToMap("title",rs.getString(2));
+					searchLocalMessage.addToMap("language",rs.getString(3));
+					searchLocalMessage.addToMap("summary",rs.getString(4));
+					searchLocalMessage.addToMap("tableofcontents",rs.getString(5));
+					searchLocalMessage.addToMap("price",rs.getString(6));
+					//searchLocalMessage.addToMap("visibility",rs.getString(7));//avrora
 				}
-			
-			counter=0;
-			insertTableSQL = "SELECT * FROM bookgenre WHERE bookid='"+Integer.toString(elem)+"';";	
-			ps = (Statement) localdbConnection.createStatement();
-			rs=(ResultSet) ps.executeQuery(insertTableSQL);
-			
-			while(rs.next()){
 				
-				counter++;
-				searchLocalMessage.addToMap("genre"+counter,rs.getString(2));
+				insertTableSQL = "SELECT * FROM booksauthor WHERE bookid='"+Integer.toString(elem)+"';";	
+				ps = (Statement) localdbConnection.createStatement();
+				rs=(ResultSet) ps.executeQuery(insertTableSQL);
 				
+					while(rs.next()){
+					
+						counter++;
+						searchLocalMessage.addToMap("author"+counter,rs.getString(2));
+					
+					}
+				
+				counter=0;
+				insertTableSQL = "SELECT * FROM bookgenre WHERE bookid='"+Integer.toString(elem)+"';";	
+				ps = (Statement) localdbConnection.createStatement();
+				rs=(ResultSet) ps.executeQuery(insertTableSQL);
+				
+				while(rs.next()){
+					
+					counter++;
+					searchLocalMessage.addToMap("genre"+counter,rs.getString(2));
+					
+				}
+				
+				counter=0;
+				insertTableSQL = "SELECT * FROM keywords WHERE bookid='"+Integer.toString(elem)+"';";	
+				ps = (Statement) localdbConnection.createStatement();
+				rs=(ResultSet) ps.executeQuery(insertTableSQL);
+				
+				while(rs.next()){
+					
+					counter++;
+					searchLocalMessage.addToMap("keyword"+counter,rs.getString(2));
+					
+				}
+				if (thismessage.getOPcode()==6)
+					searchLocalMessage.setOPCode(6);
+				else searchLocalMessage.setOPCode(5);
+				
+				
+				
+				msgtoserver.add(searchLocalMessage);
+				
+			}//if
+			} catch (SQLException e) {
+			e.printStackTrace();
 			}
-			
-			counter=0;
-			insertTableSQL = "SELECT * FROM keywords WHERE bookid='"+Integer.toString(elem)+"';";	
-			ps = (Statement) localdbConnection.createStatement();
-			rs=(ResultSet) ps.executeQuery(insertTableSQL);
-			
-			while(rs.next()){
-				
-				counter++;
-				searchLocalMessage.addToMap("keyword"+counter,rs.getString(2));
-				
-			}
-			if (thismessage.getOPcode()==6)
-				searchLocalMessage.setOPCode(6);
-			else searchLocalMessage.setOPCode(5);
-			
-			
-			
-			msgtoserver.add(searchLocalMessage);
-			
-		
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
 		
 		
 	}	

@@ -19,6 +19,8 @@ public class Get_User {
 		localdbConnection=dbConnection;
 		Statement ps=null;
 		ResultSet rs;
+		
+		
 		msgs loginLocalMessage=new msgs(2);
 			if (thismessage.getOPcode()==2)
 				loginLocalMessage.setOPCode(2);
@@ -30,10 +32,21 @@ public class Get_User {
 		
 		
 		try {
+			
+			int isloggedin = 0;//avrora
 			ps = (Statement) dbConnection.createStatement();
 			rs=(ResultSet) ps.executeQuery(insertTableSQL);
+			
+			while(rs.next())//avrora
+				isloggedin = rs.getInt(7);//avrora
+			
+			if(isloggedin == 0){//avrora
+				
+				String username = null;//avrora
+				rs.beforeFirst();//avrora
 				while(rs.next()){
 				
+					username = rs.getString(1);//avrora
 					loginLocalMessage.addToMap("username",rs.getString(1));
 					loginLocalMessage.addToMap("password",rs.getString(2));
 					loginLocalMessage.addToMap("firstname",rs.getString(3));
@@ -41,7 +54,23 @@ public class Get_User {
 					loginLocalMessage.addToMap("ssn",rs.getString(5));
 					loginLocalMessage.addToMap("type",rs.getString(6));
 				}
-			
+				
+				/*update login status*/
+				String insertTableSQL2 = "UPDATE  users SET isloggedin=1 "
+						+ "WHERE username = '"+username+"';";
+				
+				try {
+					
+					ps = (Statement) dbConnection.createStatement();
+					ps.executeUpdate(insertTableSQL2);
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				
+			}//if
+			//else(warning message)
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
