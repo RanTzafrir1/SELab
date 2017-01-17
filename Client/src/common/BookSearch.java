@@ -28,7 +28,7 @@ public class BookSearch extends abstractPanel {
 	public BookSearch() {
 		setLayout(null);
 		
-		
+		searchmsg.clearMap();
 		if (MainFrame.page.current_user.getMapValue("type").equals("0"))
 			super.backbutton.setVisible(false);
 		
@@ -140,6 +140,9 @@ public class BookSearch extends abstractPanel {
 				}
 				
 				searchmsg.clearMap();*/
+				
+			
+				
 				MainFrame.page.call_handler(searchmsg);
 				
 				//searchmsg = new msgs(5);

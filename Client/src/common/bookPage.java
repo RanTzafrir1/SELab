@@ -37,12 +37,6 @@ public class bookPage extends abstractPanel {
 		
 		lblSummary.setBounds(63, 122, 251, 65);
 		add(lblSummary);
-		
-		
-		
-
-		
-		
 
 	}
 	
@@ -98,8 +92,7 @@ public class bookPage extends abstractPanel {
 		btnUpdateBook.setBounds(60, 235, 97, 25);
 		add(btnUpdateBook);
 		
-		if (MainFrame.page.current_user.getMapValue("type").equals("0"))
-			btnUpdateBook.setVisible(false);
+
 		
 		
 		

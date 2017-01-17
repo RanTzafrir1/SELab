@@ -17,7 +17,7 @@ public class Controller_Mainpage {
 	public searchController searchmsg;
 	public ListOfReviewsController reviewmsg = new ListOfReviewsController();
 	public ListOfPurchasesController purchasemsg = new ListOfPurchasesController();
-	
+	public Error_Handle_Controller errormsg = new Error_Handle_Controller();
 	public Controller_Mainpage(ClientConsole chat)
 	{
 		this.console=chat;
@@ -36,9 +36,9 @@ public class Controller_Mainpage {
 			loginmsg.login(thismessage);
 		
 		if (thismessage.getOPcode()==5)
-			searchmsg.search(thismessage);
+			searchmsg.search(message);
 		if (thismessage.getOPcode()==6)
-			searchmsg.search(thismessage);
+			searchmsg.search(message);
 		
 		if (thismessage.getOPcode()==15)
 		{	
@@ -79,6 +79,12 @@ public class Controller_Mainpage {
 		{	
 			reviewmsg.sendReviewToServer(thismessage);
 		}
+		
+		if (thismessage.getOPcode()==20)
+			reviewmsg.sendReviewToServer(thismessage);
+		
+		if (thismessage.getOPcode()==21)
+			reviewmsg.sendReviewToServer(thismessage);
 		
 		
 		

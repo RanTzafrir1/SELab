@@ -19,12 +19,9 @@ public class Add_Book {
 	public void getAdd_Book(msgs loginmsgs,Connection dbConnection){
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
-		//PreparedStatement ps=null;
 		Statement stmt1=null;
 		int bookid=0;
 		String insertTableSQL1=null;
-		//String genreSubString=null;
-		//int i,j;
 		
 		try {			
 			

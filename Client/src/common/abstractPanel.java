@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Employee.EmployeeHomePage;
+
 public class abstractPanel extends JPanel {
 	protected JButton backbutton;
 	JButton Logoutbutton;
@@ -26,6 +28,8 @@ public class abstractPanel extends JPanel {
 		}
 		this.add(backbutton);
 		backbutton.setBounds(350, 350, 97, 25);
+		
+		
 		
 	/*	Logoutbutton = new JButton("Logout");
 		if(Logoutbutton!=null)
@@ -66,8 +70,7 @@ public class abstractPanel extends JPanel {
 	}
 	protected void MainPageFunc()
 	{
-		if(MainFrame.panelPassedList.remove(this))
-			;
+		MainFrame.panelPassedList.remove(this);
 		MainFrame.localStorage.setContentPane(MainFrame.localStorage.panelPassedList.get(MainFrame.panelPassedList.size()-1));
 		MainFrame.localStorage.setVisible(true);
 	}

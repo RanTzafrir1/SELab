@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import common.BookSearch;
 import common.MainFrame;
 import common.abstractPanel;
 import common.msgs;
@@ -38,6 +39,8 @@ public class searchAnswer extends abstractPanel {
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, Double.MIN_VALUE};
 		this.setLayout(gbl_contentPane);
+		
+		super.backbutton.setVisible(false);
 		
 		for (msgs tempmsg : purchases){
 			counterX=0;
@@ -78,7 +81,17 @@ public class searchAnswer extends abstractPanel {
 			counterY+=1;
 		}
 		
-	
+		JButton backbutton = new JButton("back");
+		backbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {	
+				new BookSearch();
+			}	
+		});
+		
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.gridx = counterX+4;
+		
+		this.add(backbutton, gbc_button);
 		
 		MainFrame.localStorage.setContentPane(this);
 		MainFrame.localStorage.setVisible(true);

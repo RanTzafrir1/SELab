@@ -24,16 +24,19 @@ public class HandleMessagesFromServer {
 		tempmsg=msgfromserver.get(0);
 		Opcheck=tempmsg.getOPcode();
 		
-
+		//System.out.println("\nThis is the opcode: "+Integer.toString(tempmsg.getOPcode()));
+		
+		if (Opcheck==0)
+			Error_Handle(tempmsg);
 		
 		if (Opcheck==2)
 			Login_Handle(tempmsg);
 		
 		if (Opcheck==6)
-			Search_Handle(msgfromserver);
+			Search_Handle(newmsgfromserver);
 		
 		if (Opcheck==5)
-			Search_Handle(msgfromserver);
+			Search_Handle(newmsgfromserver);
 		
 		if (Opcheck==9)
 			Purchases_Handle(msgfromserver);
@@ -52,6 +55,10 @@ public class HandleMessagesFromServer {
 /*	private void set_Categories(ArrayList<msgs> categorymsg) {
 		GUI.set_category_and_genre(categorymsg);
 	}*/
+
+	private void Error_Handle(msgs errormsg) {
+		GUI.errormsg.Error_Handle(errormsg);
+	}
 
 	private void Login_Handle(msgs loginmsg) {
 		GUI.loginmsg.Login_Answer(loginmsg);

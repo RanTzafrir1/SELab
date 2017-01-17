@@ -52,7 +52,7 @@ public class EchoServer extends AbstractServer
 	 msgs messagefromclient = new msgs(0);
 	 messagefromclient = (msgs) msg;
 	 
-	 HandleMessages handle = new HandleMessages(messagefromclient,sv);
+	 HandleMessages handle = new HandleMessages(messagefromclient,this);
 	 handle.letsgo();
 	 
 	 

@@ -26,12 +26,17 @@ public class Search {
 	
 	@SuppressWarnings("unused")
 	public static ArrayList<msgs> getOrSearch(msgs loginmsgs,Connection dbConnection){
+		msgtoserver.clear();
 		thismessage = loginmsgs;
 		localdbConnection=dbConnection;
+		bookidList.clear();
 		
 		msgs searchLocalMessage=new msgs(6);
 		String query1=null,query2=null,query3=null,query4=null,query5=null,query6=null;
 		String tempquery=null;
+		
+		
+
 		
 		
 		for (String key : thismessage.getMap().keySet()) 	
@@ -155,7 +160,7 @@ public class Search {
 						bookidList1.add(rs.getInt(1));
 					}
 					
-					
+	
 			
 			
 			if (intcheck==0){
@@ -176,12 +181,11 @@ public class Search {
 
 	private static ArrayList<msgs> buildMsgs(){
 		
-		
+			
 		for (Integer elem : bookidList)
 			setMsgToServer(elem);
 
-		
-		
+
 		return msgtoserver;
 		
 	

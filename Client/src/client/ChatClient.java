@@ -64,30 +64,17 @@ public class ChatClient extends AbstractClient implements Serializable
   @SuppressWarnings("unchecked")
 public void handleMessageFromServer(Object msg) 
   {
-    //this.msgslistfromserver=(ArrayList<msgs>) msg;
-    //this.msgslistfromserver=msg;
-		
-		
-	  msgfromserver = (ArrayList<msgs>) msg;
-	  
-	
-	  
-	  messagehandler.startmessagehandler(msgfromserver);
-	  //GUI.Login_Answer(msgfromserver);
-	  
-	  
-	  
-	  //System.out.printf("\nThe new username is: "+tempmsg.getMapValue("username"));
-	  //System.out.printf("\nThe new password is: "+tempmsg.getMapValue("password"));
-	//sh = new ServerHandler(msg);
-	
-	//sh.letsgo();
-	  
+	  msgfromserver = new ArrayList<msgs>();
+	  msgfromserver = (ArrayList<msgs>) msg; 
+
+	  messagehandler.startmessagehandler(msgfromserver); 
   }
   
   public void getgui(Controller_Mainpage controller_Mainpage){
 	  this.GUI=controller_Mainpage;
 	  messagehandler = new HandleMessagesFromServer(GUI);
+	  
+
   }
 
   /**

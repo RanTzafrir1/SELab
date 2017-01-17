@@ -26,6 +26,7 @@ public class HandleMessages {
 	EchoServer thisEchoServer;
 	msgs localMsg;
 
+
 	
 	
 	public HandleMessages(msgs message,EchoServer sv){
@@ -63,8 +64,32 @@ public class HandleMessages {
 			Get_ListOfReviews();
 		if ((thismessage.getOPcode())==13)
 			UpdateBook();
+		if ((thismessage.getOPcode())==20)
+			getLanguage();
+		if ((thismessage.getOPcode())==21)
+			getGenres();
 		
 	}
+	
+	private void getGenres() {
+		localMsg=new msgs(21);
+		localMsg=this.thismessage;
+		Connection conn=(Connection) connect.getConnection();
+		ArrayList <msgs> genreArrayMsg = new ArrayList <msgs>();
+		genreArrayMsg=get_Genre.getListOfGenres(localMsg,conn);
+		sendMessageToServer(genreArrayMsg);			
+	}
+	
+	
+	private void getLanguage() {
+		localMsg=new msgs(20);
+		localMsg=this.thismessage;
+		Connection conn=(Connection) connect.getConnection();
+		ArrayList <msgs> lanaugeArrayMsg = new ArrayList <msgs>();
+		lanaugeArrayMsg=get_Language.getListOfLanguages(localMsg,conn);
+		sendMessageToServer(lanaugeArrayMsg);	
+	}
+	
 	
 	private void UpdateBook() {
 		Update_Book localUpdate_Book = new Update_Book();
@@ -107,11 +132,21 @@ public class HandleMessages {
 	public Runnable Search(){
 		localMsg=new msgs(1);
 		localMsg=this.thismessage;
+		msgs errormsg = new msgs(0);
+		
 		Connection conn=(Connection) connect.getConnection();
 		ArrayList <msgs> loginArrayMsg = new ArrayList <msgs>();
+		loginArrayMsg.clear();
+	
 		loginArrayMsg=Search.getOrSearch(localMsg,conn);
+		
+		if (loginArrayMsg.size()==0)
+		{
+			errormsg.addToMap("error","No book was found");
+			loginArrayMsg.add(errormsg);
+		}
+		
 		sendMessageToServer(loginArrayMsg);	
-		//loginArrayMsg=localLogin.getLogin(localMsg, conn);
 		
 		return null;
 	}
@@ -124,11 +159,13 @@ public class HandleMessages {
 		Login localLogin = new Login();	
 		
 		loginArrayMsg=localLogin.getLogin(localMsg, conn);
-		
+
 		sendMessageToServer(loginArrayMsg);		
 		
 		return null;
 	}
+	
+	
 	
 	public Runnable Add_Book(){
 		Add_Book localAdd_Book = new Add_Book();
@@ -144,8 +181,8 @@ public class HandleMessages {
 			return null;
 	}
 		
-	private void sendMessageToServer(ArrayList <msgs> msgtoserver){
-		this.thisEchoServer.sendToAllClients(msgtoserver);
+	private void sendMessageToServer(ArrayList <msgs> msgtoserver){	
+		thisEchoServer.sendToAllClients(msgtoserver);
 	}
 	
 }

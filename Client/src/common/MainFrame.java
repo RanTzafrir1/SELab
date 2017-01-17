@@ -23,6 +23,7 @@ public class MainFrame extends JFrame{
 	 public ClientConsole client;
 	 public static Controller_Mainpage page;
 	 public static bookPage bookP = new bookPage();
+	 ArrayList<String> languagelist = new ArrayList<String>();
 	
 	 
 	 public MainFrame(ClientConsole chat)
@@ -34,9 +35,9 @@ public class MainFrame extends JFrame{
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  setSize(this.getMaximumSize());
 		  getContentPane().setBackground(Color.orange);
+		  //createLists create = new createLists();
 		  employeeLogin login=new employeeLogin(0);
-		  //setContentPane(login);
-		  //this.setVisible(true);
+
 	 }
 }
 

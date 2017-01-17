@@ -52,6 +52,7 @@ public class employeeLogin extends JPanel {
 			}
 		});
 		btnSubmit.setBounds(157, 187, 97, 25);
+		btnSubmit.setEnabled(true);
 		add(btnSubmit);
 		
 		JLabel lblUserDoesNot = new JLabel("User does not exist");
