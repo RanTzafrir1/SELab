@@ -33,11 +33,9 @@ public class UpdateBook extends abstractPanel {
 		int counterX=0,axisY=0;
 		String tempString=null;
 		String lastString=null;
+		
 		localmsg=bookMessage;
-
-
 		setLayout(null);
-
 
 		for (String key : bookMessage.getMap().keySet()) 	
 		{		
