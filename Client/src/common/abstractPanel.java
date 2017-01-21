@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Employee.EmployeeHomePage;
+import javafx.scene.paint.Color;
 
 public class abstractPanel extends JPanel {
 	protected JButton backbutton;
@@ -16,7 +17,8 @@ public class abstractPanel extends JPanel {
 		super();
 		MainFrame.localStorage.panelPassedList.add(this);
 		setLayout(null);
-
+		setBackground(java.awt.Color.GRAY);
+		
 		backbutton = new JButton("Back");	
 		backbutton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
